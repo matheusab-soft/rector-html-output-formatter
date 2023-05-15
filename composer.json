@@ -1,0 +1,22 @@
+{
+    "name": "matheusab/rector-html-output-formatter",
+    "description": "HTML Output Formatter for the Rector PHP Library.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matheus Alves Barbosa",
+            "email": "contato@matheusab.com",
+            "homepage": "https://www.matheusab.com",
+            "role": "maintainer"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MAB\\Rector": "src/"
+        }
+    }
+}
