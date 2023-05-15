@@ -112,7 +112,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
 
     public static function getGeneratedHTML(array $errorsJson): string
     {
-        $template = 'rector-report-template.php';
+        $template = 'report-template.php';
 
         return self::render($template, [
             'errorsJson' => $errorsJson,
