@@ -112,7 +112,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
 
     public static function getGeneratedHTML(array $errorsJson): string
     {
-        $template = 'report-template.php';
+        $template = __DIR__ . '/report-template.php';
 
         return self::render($template, [
             'errorsJson' => $errorsJson,
@@ -144,7 +144,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
             $content = ob_get_contents();
             ob_end_clean();
         } else {
-            throw new RuntimeException(sprintf('Cant find view file %s!', $file));
+            throw new \RuntimeException(sprintf('Cant find view file %s!', $file));
         }
 
         return $content;
