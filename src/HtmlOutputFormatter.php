@@ -45,8 +45,6 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
         $errorsJson = [
             'totals' => [
                 'changed_files' => count($processResult->getFileDiffs()),
-                'removed_and_added_files_count' => $processResult->getRemovedAndAddedFilesCount(),
-                'removed_node_count' => $processResult->getRemovedNodeCount()
             ]
         ];
 
