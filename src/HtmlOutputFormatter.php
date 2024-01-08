@@ -45,8 +45,6 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
         $errorsJson = [
             'totals' => [
                 'changed_files' => count($processResult->getFileDiffs()),
-                'removed_and_added_files_count' => $processResult->getRemovedAndAddedFilesCount(),
-                'removed_node_count' => $processResult->getRemovedNodeCount()
             ]
         ];
 
@@ -70,7 +68,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
             // for Rector CI
             $errorsJson['changed_files'][] = $relativeFilePath;
         }
-        $errors = $processResult->getErrors();
+        $errors = $processResult->getSystemErrors();
         $errorsJson['totals']['errors'] = count($errors);
         $errorsData = $this->createErrorsData($errors);
         if ($errorsData !== []) {

@@ -4,11 +4,11 @@ Example:
 
 ```php
 return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->services()
-        ->set(HtmlOutputFormatter::class)
-        ->arg('$exportedFilePathPrefix', __DIR__ . '/rector-report')
-        ->autowire()
-        ->autoconfigure();
+    $rectorConfig->singleton(HtmlOutputFormatter::class, HtmlOutputFormatter::class);
+    $rectorConfig->tag(HtmlOutputFormatter::class, OutputFormatterInterface::class);
+    $rectorConfig->when(HtmlOutputFormatter::class)
+        ->needs('$exportedFilePathPrefix')
+        ->give(__DIR__ . '/rector-report');
 ```
 
 
