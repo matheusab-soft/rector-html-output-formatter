@@ -1,0 +1,14 @@
+services:
+  php:
+    build:
+      context: .
+      args:
+        PHP_VERSION: 8.2
+        COMPOSER_VERSION: 2.6.6
+    volumes:
+      - .:/app
+    command:
+      - /bin/sh
+      - -c
+      - |
+        while :; do sleep 1; done
