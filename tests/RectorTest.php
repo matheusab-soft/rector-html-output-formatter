@@ -23,10 +23,8 @@ final class RectorTest extends TestCase {
 
         $rectorBin = realpath(__DIR__ . '/../vendor/bin/rector');
         $testSrcPath = realpath(__DIR__ . '/test_src');
-        $command = "../vendor/bin/rector process $testSrcPath --dry-run --output-format=html";
-        echo "Command: $command";
+        $command = "$rectorBin -c tests/rector.php process $testSrcPath --dry-run --output-format=html";
         $commandResult = shell_exec($command);
-        echo $commandResult;
         $actualReportContent = file_get_contents($reportFile);
 
         $this->assertEquals($expectedCommandResult, $commandResult);
