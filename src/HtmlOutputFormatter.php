@@ -8,7 +8,9 @@ use Rector\ChangesReporting\Annotation\RectorsChangelogResolver;
 use Rector\ChangesReporting\Contract\Output\OutputFormatterInterface;
 use Rector\ValueObject\Configuration;
 use Rector\ValueObject\Error\SystemError;
-use Rector\ValueObject\ProcessResult;;
+use Rector\ValueObject\ProcessResult;
+
+;
 use Rector\Parallel\ValueObject\Bridge;
 
 use function count;
@@ -16,24 +18,19 @@ use function ksort;
 
 final class HtmlOutputFormatter implements OutputFormatterInterface
 {
+
     /**
      * @var string
      */
     public const NAME = 'html';
-    /**
-     * @readonly
-     * @var RectorsChangelogResolver
-     */
-    private $rectorsChangelogResolver;
+
     /** @var string */
     private $exportedFilePathPrefix;
 
-    public function __construct(RectorsChangelogResolver $rectorsChangelogResolver, string $exportedFilePathPrefix)
+    public function __construct(string $exportedFilePathPrefix)
     {
-        $this->rectorsChangelogResolver = $rectorsChangelogResolver;
         $this->exportedFilePathPrefix = $exportedFilePathPrefix;
     }
-
 
     public function getName(): string
     {
@@ -45,7 +42,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
         $errorsJson = [
             'totals' => [
                 'changed_files' => count($processResult->getFileDiffs()),
-            ]
+            ],
         ];
 
         $fileDiffs = $processResult->getFileDiffs();
@@ -53,17 +50,14 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
 
         $header = "--- Original\n+++ New\n";
 
-
         foreach ($fileDiffs as $fileDiff) {
             $relativeFilePath = $fileDiff->getRelativeFilePath();
-            $appliedRectorsWithChangelog = $this->rectorsChangelogResolver->resolve($fileDiff->getRectorClasses());
             $newHeader = "--- $relativeFilePath\n+++ $relativeFilePath\n";
 
             $errorsJson[Bridge::FILE_DIFFS][] = [
                 'file' => $relativeFilePath,
                 'diff' => str_replace($header, $newHeader, $fileDiff->getDiff()),
                 'applied_rectors' => $fileDiff->getRectorClasses(),
-                'applied_rectors_with_changelog' => $appliedRectorsWithChangelog
             ];
             // for Rector CI
             $errorsJson['changed_files'][] = $relativeFilePath;
@@ -75,7 +69,6 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
             $errorsJson['errors'] = $errorsData;
         }
 
-
         file_put_contents($this->exportedFilePathPrefix . '-report.html', self::getGeneratedHTML($errorsJson));
         file_put_contents(
             $this->exportedFilePathPrefix . '-data.php',
@@ -86,6 +79,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
 
     /**
      * @param SystemError[] $errors
+     *
      * @return mixed[]
      */
     private function createErrorsData(array $errors): array
@@ -94,7 +88,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
         foreach ($errors as $error) {
             $errorDataJson = [
                 'message' => $error->getMessage(),
-                'file' => $error->getRelativeFilePath()
+                'file' => $error->getRelativeFilePath(),
             ];
 
             if ($error->getRectorClass() !== null) {
@@ -114,7 +108,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
 
         return self::render($template, [
             'errorsJson' => $errorsJson,
-            'diffOccurrences' => self::getDiffOcurrences($errorsJson)
+            'diffOccurrences' => self::getDiffOcurrences($errorsJson),
         ]);
     }
 
@@ -147,4 +141,5 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
 
         return $content;
     }
+
 }
