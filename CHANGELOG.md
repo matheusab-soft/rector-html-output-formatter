@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0
+### Changed
+- Minimum Rector version is now 1.0
+
 ## 0.4
 ### Changed
 - Restrict version constraint to due to RectorsChangelogResolver class being removed on rector:1.2.0 (see https://github.com/matheusab-soft/rector-html-output-formatter/issues/5)
