@@ -1,3 +1,6 @@
+# Install
+`composer require --dev matheusab/rector-html-output-formatter`
+
 # Usage
 
 Configure it in your `rector.php`, where the `exportedFilePathPrefix` argument is the path to the exported report.
