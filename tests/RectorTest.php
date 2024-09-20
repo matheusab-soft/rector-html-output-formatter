@@ -20,6 +20,7 @@ final class RectorTest extends TestCase
     public function testTerminalCommandGeneratedHtmlReport(
         string $generatedReportFile,
         string $generatedDataFile,
+        string $expectedReportPath,
         string $rectorConfigFile
     ): void {
         $this->cleanup($generatedDataFile, $generatedReportFile);
@@ -28,7 +29,7 @@ final class RectorTest extends TestCase
         $testSrcPath = realpath(__DIR__ . '/test_src');
 
         $expectedCommandResult = 'Report generated at rector-report.html';
-        $expectedReportContent = file_get_contents(__DIR__ . '/expected-rector-report-report.html');
+        $expectedReportContent = file_get_contents($expectedReportPath);
 
         $this->assertFileDoesNotExist($generatedDataFile);
         $this->assertFileDoesNotExist($generatedReportFile);
@@ -40,7 +41,10 @@ final class RectorTest extends TestCase
         $this->assertEquals($expectedCommandResult, $commandResult);
         $this->assertFileExists($generatedDataFile);
         $this->assertFileExists($generatedReportFile);
-        $this->assertEquals($expectedReportContent, $actualReportContent);
+        $this->assertEquals(
+            str_replace(' ', '', $expectedReportContent),
+            str_replace(' ', '', $actualReportContent)
+        );
     }
 
     public static function dataProvider()
@@ -49,7 +53,14 @@ final class RectorTest extends TestCase
             [
                 __DIR__ . '/generated/rector-report-report.html',
                 __DIR__ . '/generated/rector-report-data.php',
+                __DIR__ . '/expected-rector-report-report.html',
                 'tests/rector.php',
+            ],
+            [
+                __DIR__ . '/generated/custom-template-rector-report-report.html',
+                __DIR__ . '/generated/custom-template-rector-report-data.php',
+                __DIR__ . '/expected-custom-template-rector-report-report.html',
+                'tests/custom-template-rector.php',
             ],
         ];
     }

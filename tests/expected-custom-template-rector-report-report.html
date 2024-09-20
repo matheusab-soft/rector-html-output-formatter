@@ -1,0 +1,34 @@
+<html>
+  <body>
+    <table>
+      <tr>
+        <td>tests/test_src/ClassA.php</td>
+        <td>--- tests/test_src/ClassA.php
++++ tests/test_src/ClassA.php
+@@ -4,10 +4,12 @@
+
+ class ClassA {
+
++    /**
++     * @var int
++     */
++    public $dynamicProp;
+     public function doSomething() {
+         $this-&gt;dynamicProp = 1;
+     }
+-
+-    public function __construct() {}
+
+ }
+\ No newline at end of file
+                </td>
+                          <td>Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector<br>Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector</td>
+                        </tr>
+        </table>
+
+      <ul>
+        <li>Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector - 1</li>
+        <li>Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector - 1</li>
+      </ul>
+    </body>
+</html>

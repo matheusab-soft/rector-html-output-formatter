@@ -24,12 +24,16 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
      */
     public const NAME = 'html';
 
-    /** @var string */
     private $exportedFilePathPrefix;
 
-    public function __construct(string $exportedFilePathPrefix)
-    {
+    private $customReportTemplatePath;
+
+    public function __construct(
+        string $exportedFilePathPrefix,
+        string $customReportTemplatePath = __DIR__ . '/report-template.php'
+    ) {
         $this->exportedFilePathPrefix = $exportedFilePathPrefix;
+        $this->customReportTemplatePath = $customReportTemplatePath;
     }
 
     public function getName(): string
@@ -69,7 +73,10 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
             $errorsJson['errors'] = $errorsData;
         }
 
-        file_put_contents($this->exportedFilePathPrefix . '-report.html', self::getGeneratedHTML($errorsJson));
+        file_put_contents(
+            $this->exportedFilePathPrefix . '-report.html',
+            self::getGeneratedHTML($this->customReportTemplatePath, $errorsJson)
+        );
         file_put_contents(
             $this->exportedFilePathPrefix . '-data.php',
             '<?php return ' . var_export($errorsJson, true) . ';'
@@ -102,11 +109,9 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
         return $errorsData;
     }
 
-    public static function getGeneratedHTML(array $errorsJson): string
+    public static function getGeneratedHTML(string $templatePath, array $errorsJson): string
     {
-        $template = __DIR__ . '/report-template.php';
-
-        return self::render($template, [
+        return self::render($templatePath, [
             'errorsJson' => $errorsJson,
             'diffOccurrences' => self::getDiffOcurrences($errorsJson),
         ]);
