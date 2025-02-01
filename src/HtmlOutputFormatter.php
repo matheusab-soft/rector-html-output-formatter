@@ -49,6 +49,12 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
             ],
         ];
 
+
+        if ($errorsJson['totals']['changed_files'] == 0) {
+            echo "0 changed files. Report not generated. \n";
+            exit();
+        }
+
         $fileDiffs = $processResult->getFileDiffs();
         ksort($fileDiffs);
 
@@ -81,7 +87,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
             $this->exportedFilePathPrefix . '-data.php',
             '<?php return ' . var_export($errorsJson, true) . ';'
         );
-        echo 'Report generated at rector-report.html';
+        echo "Report generated at ".$this->exportedFilePathPrefix."-report.html\n";
     }
 
     /**
