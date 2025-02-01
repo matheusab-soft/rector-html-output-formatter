@@ -28,7 +28,7 @@ final class RectorTest extends TestCase
         $rectorBin = realpath(__DIR__ . '/../vendor/bin/rector');
         $testSrcPath = realpath(__DIR__ . '/test_src');
 
-        $expectedCommandResult = 'Report generated at rector-report.html';
+        $expectedCommandResult = "Report generated at $generatedReportFile\n";
         $expectedReportContent = file_get_contents($expectedReportPath);
 
         $this->assertFileDoesNotExist($generatedDataFile);
