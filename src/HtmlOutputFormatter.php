@@ -4,13 +4,10 @@ declare (strict_types=1);
 
 namespace MAB\Rector;
 
-use Rector\ChangesReporting\Annotation\RectorsChangelogResolver;
 use Rector\ChangesReporting\Contract\Output\OutputFormatterInterface;
 use Rector\ValueObject\Configuration;
 use Rector\ValueObject\Error\SystemError;
 use Rector\ValueObject\ProcessResult;
-
-;
 use Rector\Parallel\ValueObject\Bridge;
 
 use function count;
@@ -49,7 +46,6 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
             ],
         ];
 
-
         if ($errorsJson['totals']['changed_files'] == 0) {
             echo "0 changed files. Report not generated. \n";
             exit();
@@ -87,7 +83,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
             $this->exportedFilePathPrefix . '-data.php',
             '<?php return ' . var_export($errorsJson, true) . ';'
         );
-        echo "Report generated at ".$this->exportedFilePathPrefix."-report.html\n";
+        echo "Report generated at " . $this->exportedFilePathPrefix . "-report.html\n";
     }
 
     /**
