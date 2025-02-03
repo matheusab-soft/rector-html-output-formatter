@@ -32,21 +32,19 @@ $chunks = array_chunk($errorsJson['file_diffs'], 10);
     </div>
 </div>
 
-<div class="container mt-4">
-    <nav aria-label="Affected files diff pagination">
-        <ul class="pagination pagination-lg justify-content-center">
-            <?php
-            for ($i = 0; $i < count($chunks); $i++): ?>
-                <li class="page-item <?= $i === 0 ? 'active' : ''; ?>" role="presentation">
-                    <a
-                        href="#changes-by-file-title" data-target="#files-page-<?= $i ?>" class="page-link"
-                    ><?= $i+1 ?></a>
-                </li>
-            <?php
-            endfor; ?>
-        </ul>
-    </nav>
-</div>
+<nav class="container mt-4" aria-label="Affected files diff pagination">
+    <ul class="pagination pagination-lg justify-content-center flex-wrap">
+        <?php
+        for ($i = 0; $i < count($chunks); $i++): ?>
+            <li class="page-item <?= $i === 0 ? 'active' : ''; ?>" role="presentation">
+                <a
+                    href="#changes-by-file-title" data-target="#files-page-<?= $i ?>" class="page-link"
+                ><?= $i + 1 ?></a>
+            </li>
+        <?php
+        endfor; ?>
+    </ul>
+</nav>
 
 
 <script>
