@@ -1,10 +1,6 @@
-<div class="col-xxl-4 col-xl-12">
-    <div class="card mb-5">
-        <div class="card-body">
-            <div class="col">
-                <canvas id="chart"></canvas>
-            </div>
-        </div>
+<div class="col-4 mb-3">
+    <div class="h-100 d-flex justify-content-center align-items-center p-2">
+        <canvas class="d-flex align-self-center" id="chart"></canvas>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -45,7 +41,7 @@
             ]
         }
         const config = {
-            type: 'bar',
+            type: 'pie',
             data: data,
             options: {
                 scales: {

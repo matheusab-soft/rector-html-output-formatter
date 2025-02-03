@@ -5,13 +5,12 @@ $diff = htmlentities($file['diff']);
 
 <div class="card mb-5">
     <div class="card-header">
-        <h5><?= $file['file'] ?></h5>
+        <h5><code><?= $file['file'] ?></code></h5>
     </div>
     <div class="card-body">
         <div class="row">
-
             <div class="col-xxl-3">
-                <h6 class="mt-xl-0 mt-lg-3">Applied Rectors</h6>
+                <h6 class="mt-xl-0 mt-lg-3 text-uppercase">Applied Rectors</h6>
                 <ul class="list-group">
                     <?php
                     foreach ($file['applied_rectors'] as $fqn): ?>

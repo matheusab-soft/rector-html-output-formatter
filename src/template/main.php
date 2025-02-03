@@ -1,12 +1,7 @@
 <?php
 
-//$maxVisibleGraphLabels = 20;
-//$graphLabels = array_keys(array_slice($diffOccurrences, 0, $maxVisibleGraphLabels));
-//$graphLabels[] = sprintf("Other (%s rectors)", count($diffOccurrences) - $maxVisibleGraphLabels);
+$currentDate = date('m/d/Y H:i:s', time());
 $graphLabels = array_keys($diffOccurrences);
-
-//$graphDiffOccurrences = array_values(array_slice($diffOccurrences, 0, $maxVisibleGraphLabels));
-//$graphDiffOccurrences[] = array_sum(array_slice($diffOccurrences, $maxVisibleGraphLabels))
 $graphDiffOccurrences = array_values($diffOccurrences);
 
 function getShortClassName($fqn)
@@ -18,7 +13,7 @@ function getShortClassName($fqn)
 function htmlAppliedRector($fqn)
 {
     $shortClassName = getShortClassName($fqn);
-    return "<i title='$fqn'>$shortClassName</i>";
+    return "<pre class='m-0'><code title='$fqn'>$shortClassName</code></pre>";
 }
 
 ?>
@@ -42,14 +37,18 @@ function htmlAppliedRector($fqn)
         ></script>
 
         <style>
-            <?include 'style.css';?>
+            <?php include 'style.css'?>
         </style>
     </head>
     <body>
-        <div class="container-fluid my-5">
-            <pre id="myDiffElement"></pre>
-            <script>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Rector HTML Report</a> <small><?= $currentDate ?></small>
+            </div>
+        </nav>
 
+        <div class="container-fluid my-3">
+            <script>
                 /**
                  * @param {Element} containerEl
                  */
@@ -77,12 +76,12 @@ function htmlAppliedRector($fqn)
 
 
             </script>
+            <h1>Summary</h1>
             <div class="row" id="stats-row">
-                <?php
-                include __DIR__ . '/chart.php' ?>
 
                 <?php
                 include __DIR__ . '/applied_rectors.php' ?>
+
 
                 <?php
                 include __DIR__ . '/affected_files.php' ?>
@@ -99,5 +98,9 @@ function htmlAppliedRector($fqn)
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
             crossorigin="anonymous"
         ></script>
+        <?php
+        include 'footer.php';
+        ?>
+
     </body>
 </html>

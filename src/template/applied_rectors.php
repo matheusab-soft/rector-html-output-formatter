@@ -1,4 +1,4 @@
-<div class="col-xxl-4 col-xl-7">
+<div class="col-xl-6 mb-3">
     <div class="card mb-5">
         <div class="card-header">
             <h3 class="d-flex">
@@ -8,29 +8,12 @@
             </h3>
         </div>
         <div class="card-body">
-            <div class="table-responsive mh-100">
-                <table class="table table-striped sticky-header mh-100">
-                    <thead>
-                        <tr>
-                            <th>Rector Class</th>
-                            <th>Occurrences</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($diffOccurrences as $fqn => $occurrence): ?>
-                            <tr>
-                                <td><?= htmlAppliedRector($fqn) ?></td>
-                                <td>
-                                <span class="badge rounded-pill">
-                                <?= $occurrence ?>
-                                </span>
-                                </td>
-                            </tr>
-                        <?php
-                        endforeach; ?>
-                    </tbody>
-                </table>
+            <div class="row">
+                <?php
+                include 'chart.php';
+                include 'applied_rectors_content.php';
+                ?>
+
             </div>
         </div>
     </div>
