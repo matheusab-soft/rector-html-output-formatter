@@ -48,8 +48,6 @@
                     x: {
                         ticks: {
                             display: false,
-                            z: 9999,
-                            padding: -100
                         }
                     },
                 },
