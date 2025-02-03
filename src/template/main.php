@@ -9,6 +9,18 @@ $graphLabels = array_keys($diffOccurrences);
 //$graphDiffOccurrences[] = array_sum(array_slice($diffOccurrences, $maxVisibleGraphLabels))
 $graphDiffOccurrences = array_values($diffOccurrences);
 
+function getShortClassName($fqn)
+{
+    $rectorClassName = explode('\\', $fqn);
+    return $rectorClassName[count($rectorClassName) - 1];
+}
+
+function htmlAppliedRector($fqn)
+{
+    $shortClassName = getShortClassName($fqn);
+    return "<i title='$fqn'>$shortClassName</i>";
+}
+
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="dark">

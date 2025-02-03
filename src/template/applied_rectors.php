@@ -18,9 +18,9 @@
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($diffOccurrences as $diff => $occurrence): ?>
+                        foreach ($diffOccurrences as $fqn => $occurrence): ?>
                             <tr>
-                                <td><i><?= $diff ?></i></td>
+                                <td><?= htmlAppliedRector($fqn) ?></td>
                                 <td><?= $occurrence ?></td>
                             </tr>
                         <?php
