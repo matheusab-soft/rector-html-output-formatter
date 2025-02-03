@@ -40,7 +40,7 @@ $chunks = array_chunk($errorsJson['file_diffs'], 10);
                 <li class="page-item <?= $i === 0 ? 'active' : ''; ?>" role="presentation">
                     <a
                         href="#changes-by-file-title" data-target="#files-page-<?= $i ?>" class="page-link"
-                    ><?= $i ?></a>
+                    ><?= $i+1 ?></a>
                 </li>
             <?php
             endfor; ?>
