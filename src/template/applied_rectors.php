@@ -1,7 +1,10 @@
 <div class="col-xxl-4 col-xl-7">
     <div class="card mb-5">
         <div class="card-header">
-            <h3>Applied Rectors <small style="font-size: 13px;">(<?= count($diffOccurrences) ?>)</small>
+            <h3 class="d-flex">
+                <span class="flex-grow-1">Applied Rectors</span>
+
+                <span class="badge rounded-pill bg-primary"><?= count($diffOccurrences) ?></span>
             </h3>
         </div>
         <div class="card-body">

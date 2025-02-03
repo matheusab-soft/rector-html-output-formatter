@@ -30,87 +30,19 @@ $graphDiffOccurrences = array_values($diffOccurrences);
         ></script>
 
         <style>
-            #stats-row .table-responsive,
-            #stats-row .list-group,
-            #stats-row canvas {
-                max-height: 600px !important;
-            }
-            #stats-row #chart {
-                width: 100%;
-                min-height: 100%;
-                height: 600px;
-            }
-            .sticky-header thead {
-                background: var(--bs-card-bg);
-                position: sticky;
-                top: 0;
-            }
-
-            .sticky-header thead th {
-                position: sticky;
-                top: 0px;
-            }
-
-            body {
-                min-height: 100vh;
-
-            }
-            [data-bs-theme="dark"] .d2h-info {
-                background-color: #424242;
-            }
-
-            [data-bs-theme="dark"] .d2h-ins {
-                background-color: #274427;
-            }
-
-            [data-bs-theme="dark"] .d2h-code-side-line del {
-                background-color: #a74b50;
-            }
-
-            [data-bs-theme="dark"] .d2h-del {
-                background-color: #4a2c2e;
-                border-color: #7a4747;
-            }
-
-            [data-bs-theme="dark"] .d2h-code-side-emptyplaceholder, .d2h-emptyplaceholder {
-                background-color: #222;
-                border-color: #2a2a2a;
-            }
-
-            [data-bs-theme="dark"] .d2h-code-side-line {
-                color: #afafaf;
-            }
-
-            [data-bs-theme="dark"] .d2h-code-side-line ins {
-                background-color: #337432;
-            }
-
-            [data-bs-theme="dark"] .d2h-code-side-linenumber {
-                background-color: #343434;
-                border: solid #363636;
-                color: rgb(255 255 255 / 30%);
-            }
-
-            [data-bs-theme="dark"] .d2h-file-wrapper {
-                border: 1px solid #444;
-            }
-
-            [data-bs-theme="dark"] .d2h-file-header {
-                background-color: #242424;
-                border-bottom: 1px solid #525252;
-            }
-
-            [data-bs-theme="dark"] .d2h-del {
-                background-color: #4a2c2e;
-            }
+            <?include 'style.css';?>
         </style>
     </head>
     <body>
         <div class="container-fluid my-5">
             <pre id="myDiffElement"></pre>
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    document.querySelectorAll('.code-diff-container').forEach(targetElement => {
+
+                /**
+                 * @param {Element} containerEl
+                 */
+                function enableCodeDiffOn(containerEl) {
+                    containerEl.querySelectorAll('.code-diff-container').forEach(targetElement => {
                         const diffString = targetElement.dataset.content
                         var configuration = {
                             drawFileList: false,
@@ -129,6 +61,11 @@ $graphDiffOccurrences = array_values($diffOccurrences);
                         diff2htmlUi.draw();
                         diff2htmlUi.highlightCode();
                     })
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+
+                    enableCodeDiffOn(document.querySelector('.tab-pane.active'))
 
                     const chartEl = document.getElementById('chart');
                     const labels = <?=json_encode($graphLabels);?>;
