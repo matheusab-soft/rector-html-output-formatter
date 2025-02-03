@@ -10,16 +10,16 @@
 .d2h-diff-table {
 	position: relative;
 }
-#stats-row .table-responsive,
-#stats-row .list-group,
-#stats-row canvas {
+#overview-row .table-responsive,
+#overview-row .list-group,
+#overview-row canvas {
 	max-height: 600px !important;
 	overflow-y: auto;
 }
-#stats-row .card {
+#overview-row .card {
 	height: 100%;
 }
-#stats-row #chart {
+#overview-row #chart {
 	width: 100%;
 }
 .sticky-header thead {

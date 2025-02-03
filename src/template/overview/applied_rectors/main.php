@@ -10,9 +10,10 @@
         <div class="card-body">
             <div class="row">
                 <?php
-                include 'chart.php';
-                include 'applied_rectors_content.php';
-                ?>
+                include 'chart.php'; ?>
+
+                <?php
+                include 'applied_rectors_content.php'; ?>
 
             </div>
         </div>

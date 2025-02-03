@@ -21,7 +21,7 @@ $chunks = array_chunk($errorsJson['file_diffs'], 10);
                 >
                     <?php
                     foreach ($chunk as $file):
-                        include 'file_diff_card.php';
+                        include 'card.php';
                     endforeach;
                     ?>
                 </div>

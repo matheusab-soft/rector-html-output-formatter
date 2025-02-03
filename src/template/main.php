@@ -76,21 +76,13 @@ function htmlAppliedRector($fqn)
 
 
             </script>
-            <h1>Summary</h1>
-            <div class="row" id="stats-row">
 
-                <?php
-                include __DIR__ . '/applied_rectors.php' ?>
-
-
-                <?php
-                include __DIR__ . '/affected_files.php' ?>
-            </div>
+            <?php
+            include 'overview/main.php' ?>
 
 
             <?php
-            include __DIR__ . '/changes_by_file.php'
-            ?>
+            include 'changes_by_file/main.php' ?>
 
         </div>
         <script
