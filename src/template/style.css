@@ -74,6 +74,7 @@ body {
 
 [data-bs-theme="dark"] .d2h-file-wrapper {
 	border: 1px solid #444;
+	margin: 0;
 }
 
 [data-bs-theme="dark"] .d2h-file-header {

@@ -4,7 +4,7 @@
 
             <code><small class="text-muted"> Report generated at <b><?= $currentDate ?></b> with <a
                         target="_blank" href="https://github.com/matheusab-soft/rector-html-output-formatter/"
-                    >matheusab/rector-html-output-formatter</a>, a plugin for Rector created with ❤️ by Matheus Alves Barbosa
+                    >matheusab/rector-html-output-formatter</a><br>Created with ❤️ by Matheus Alves Barbosa
                 </small> </code>
         </div>
 
