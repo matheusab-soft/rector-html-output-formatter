@@ -10,16 +10,8 @@ $diff = htmlentities($file['diff']);
     <div class="card-body">
         <div class="row">
 
-            <div class="col-xxl-8">
-                <div class="code-diff-container" data-content="<?= $diff ?>">
-                    <code>
-                        <pre><?= $diff ?></pre>
-                    </code>
-                </div>
-            </div>
-
-            <div class="col-xxl-4">
-                <h6 class="mt-xl-0 mt-lg-4">Applied Rectors</h6>
+            <div class="col-xxl-3">
+                <h6 class="mt-xl-0 mt-lg-3">Applied Rectors</h6>
                 <ul class="list-group">
                     <?php
                     foreach ($file['applied_rectors'] as $fqn): ?>
@@ -28,6 +20,15 @@ $diff = htmlentities($file['diff']);
                     endforeach ?>
                 </ul>
             </div>
+
+            <div class="col-xxl-9">
+                <div class="code-diff-container" data-content="<?= $diff ?>">
+                    <code>
+                        <pre><?= $diff ?></pre>
+                    </code>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

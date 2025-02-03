@@ -1,3 +1,12 @@
+.d2h-file-side-diff {
+	overflow: auto;
+}
+.d2h-code-wrapper {
+	height: 410px;
+}
+.d2h-diff-table {
+	position: relative;
+}
 #stats-row .table-responsive,
 #stats-row .list-group,
 #stats-row canvas {

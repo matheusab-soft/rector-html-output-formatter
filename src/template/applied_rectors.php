@@ -21,7 +21,11 @@
                         foreach ($diffOccurrences as $fqn => $occurrence): ?>
                             <tr>
                                 <td><?= htmlAppliedRector($fqn) ?></td>
-                                <td><?= $occurrence ?></td>
+                                <td>
+                                <span class="badge rounded-pill">
+                                <?= $occurrence ?>
+                                </span>
+                                </td>
                             </tr>
                         <?php
                         endforeach; ?>
