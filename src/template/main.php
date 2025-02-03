@@ -187,14 +187,20 @@ $graphDiffOccurrences = array_values($diffOccurrences);
                 });
             </script>
             <div class="row" id="stats-row">
-                <?php include __DIR__ . '/chart.php' ?>
-                <?php include __DIR__ . '/applied_rectors.php' ?>
-                <?php include __DIR__ . '/affected_files.php' ?>
+                <?php
+                include __DIR__ . '/chart.php' ?>
+
+                <?php
+                include __DIR__ . '/applied_rectors.php' ?>
+
+                <?php
+                include __DIR__ . '/affected_files.php' ?>
             </div>
 
 
             <?php
-            include __DIR__ . '/changes_by_file.php' ?>
+            include __DIR__ . '/changes_by_file.php'
+            ?>
 
         </div>
         <script
