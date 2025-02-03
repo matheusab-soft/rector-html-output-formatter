@@ -51,7 +51,7 @@ You may use the following variables on the template:
 
 ## Examples
 
-* [Default template](src/report-template.php)
+* [Default template](src/template/main.php)
 * [A simple template used for testing purposes](tests/custom_template.php)
 
 # Generated report screenshots
