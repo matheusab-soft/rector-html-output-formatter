@@ -14,6 +14,7 @@
 #stats-row .list-group,
 #stats-row canvas {
 	max-height: 600px !important;
+	overflow-y: auto;
 }
 #stats-row .card {
 	height: 100%;
