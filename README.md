@@ -56,5 +56,9 @@ You may use the following variables on the template:
 
 # Generated report screenshots
 
-![image](https://github.com/matheusab-soft/rector-html-output-formatter/assets/3750530/6854d4c6-0f46-4ceb-a582-f3586c2e3bf9)
-![image](https://github.com/matheusab-soft/rector-html-output-formatter/assets/3750530/7a410074-a7dd-4fc8-a67f-42d477cb37a3)
+![image](https://github.com/user-attachments/assets/9ae767d0-399c-47c5-99ce-5491a2eebf3e)
+
+![image](https://github.com/user-attachments/assets/9509596f-f46c-46cd-b5ad-cd04257a5d2f)
+
+
+
