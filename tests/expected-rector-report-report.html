@@ -4,16 +4,126 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Rector Process Report</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css"/>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+            crossorigin="anonymous"
+        >
+        <link
+            rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css"
+        />
+        <script
+            type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"
+        ></script>
+
+        <style>
+            .d2h-file-header.d2h-sticky-header {
+	display: none;
+}
+.d2h-changed-tag {
+	display: none;
+}
+.d2h-file-side-diff {
+	overflow: auto;
+}
+.d2h-code-wrapper {
+	height: 410px;
+}
+.d2h-diff-table {
+	position: relative;
+}
+#overview-row .table-responsive,
+#overview-row .list-group,
+#overview-row canvas {
+	max-height: 600px !important;
+	overflow-y: auto;
+}
+#overview-row .card {
+	height: 100%;
+}
+#overview-row #chart {
+	width: 100%;
+}
+.sticky-header thead {
+	background: var(--bs-card-bg);
+	position: sticky;
+	top: 0;
+}
+
+.sticky-header thead th {
+	position: sticky;
+	top: 0px;
+}
+
+body {
+	min-height: 100vh;
+
+}
+[data-bs-theme="dark"] .d2h-info {
+	background-color: #424242;
+}
+
+[data-bs-theme="dark"] .d2h-ins {
+	background-color: #274427;
+}
+
+[data-bs-theme="dark"] .d2h-code-side-line del {
+	background-color: #a74b50;
+}
+
+[data-bs-theme="dark"] .d2h-del {
+	background-color: #4a2c2e;
+	border-color: #7a4747;
+}
+
+[data-bs-theme="dark"] .d2h-code-side-emptyplaceholder, .d2h-emptyplaceholder {
+	background-color: #222;
+	border-color: #2a2a2a;
+}
+
+[data-bs-theme="dark"] .d2h-code-side-line {
+	color: #afafaf;
+}
+
+[data-bs-theme="dark"] .d2h-code-side-line ins {
+	background-color: #337432;
+}
+
+[data-bs-theme="dark"] .d2h-code-side-linenumber {
+	background-color: #343434;
+	border: solid #363636;
+	color: rgb(255 255 255 / 30%);
+}
+
+[data-bs-theme="dark"] .d2h-file-wrapper {
+	border: 1px solid #444;
+	margin: 0;
+}
+
+[data-bs-theme="dark"] .d2h-file-header {
+	background-color: #242424;
+	border-bottom: 1px solid #525252;
+}
+
+[data-bs-theme="dark"] .d2h-del {
+	background-color: #4a2c2e;
+}        </style>
     </head>
     <body>
-        <div class="container-fluid my-5" style="max-width: 1920px;">
-            <pre id="myDiffElement"></pre>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Rector HTML Report</a> <small>Generated at Feb 19 1993, 00:00:00</small>
+            </div>
+        </nav>
+
+        <div class="container-fluid my-3">
             <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    document.querySelectorAll('.code-diff-container').forEach(targetElement => {
+                /**
+                 * @param {Element} containerEl
+                 */
+                function enableCodeDiffOn(containerEl) {
+                    containerEl.querySelectorAll('.code-diff-container').forEach(targetElement => {
                         const diffString = targetElement.dataset.content
                         var configuration = {
                             drawFileList: false,
@@ -32,71 +142,180 @@
                         diff2htmlUi.draw();
                         diff2htmlUi.highlightCode();
                     })
-                });
+                }
+
+
             </script>
+
+            <h1>Summary</h1>
+
+<div class="row" id="overview-row">
+    <div class="col-xl-6 mb-3">
+    <div class="card mb-5">
+        <div class="card-header">
+            <h3 class="d-flex">
+                <span class="flex-grow-1">Applied Rectors</span>
+
+                <span class="badge rounded-pill bg-primary">2</span>
+            </h3>
+        </div>
+        <div class="card-body">
             <div class="row">
-                <div class="col-md-7">
-                    <div class="card mb-5">
-                        <div class="card-header">
-                            <h3>Applied Rectors <small style="font-size: 13px;">(2)</small>
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead>
+                <div class="col-4 mb-3">
+    <div class="h-100 d-flex justify-content-center align-items-center p-2">
+        <canvas class="d-flex align-self-center" id="chart"></canvas>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        enableCodeDiffOn(document.querySelector('.tab-pane.active'))
+
+        const chartEl = document.getElementById('chart');
+        const labels = ["Rector\\CodeQuality\\Rector\\Class_\\CompleteDynamicPropertiesRector","Rector\\DeadCode\\Rector\\ClassMethod\\RemoveEmptyClassMethodRector"];
+        const values = [1,1];
+        const colors = [
+            '#118fff',
+            '#36b9ff',
+            '#3800ff',
+            '#5319ff',
+            '#4b7aff',
+            '#d536c0',
+            '#dd54ff',
+            '#e5afff',
+            '#16ffff',
+            '#0b7562',
+            '#005149',
+            '#b55c39',
+            '#ba775e',
+            '#d3a698',
+        ];
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Ocurrences',
+                    data: values,
+                    borderWidth: 1,
+                    borderColor: 'transparent',
+                    backgroundColor: colors
+                }
+            ]
+        }
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+                scales: {
+                    x: {
+                        ticks: {
+                            display: false,
+                        }
+                    },
+                },
+                responsive: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                }
+            },
+        };
+
+        new Chart(chartEl, config);
+    });
+</script>
+                <div class="col-8">
+    <div class="table-responsive mh-100">
+        <table class="table table-striped sticky-header mh-100">
+            <thead>
+                <tr>
+                    <th>Rector Class</th>
+                    <th>Occurrences</th>
+                </tr>
+            </thead>
+            <tbody>
                                     <tr>
-                                        <th>Rector Class</th>
-                                        <th>Occurrences</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                                                            <tr>
-                                            <td><i>Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector</i></td>
-                                            <td>1</td>
-                                        </tr>
-                                                                            <tr>
-                                            <td><i>Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector</i></td>
-                                            <td>1</td>
-                                        </tr>
-                                                                    </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                        <td><pre class='m-0'><code title='Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector'>CompleteDynamicPropertiesRector</code></pre></td>
+                        <td>
+                            <span class="badge rounded-pill">
+                            1                            </span>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td><pre class='m-0'><code title='Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector'>RemoveEmptyClassMethodRector</code></pre></td>
+                        <td>
+                            <span class="badge rounded-pill">
+                            1                            </span>
+                        </td>
+                    </tr>
+                            </tbody>
+        </table>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="col-xl-6 col-md-12 mb-3">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="d-flex">
+                <span class="flex-grow-1">Affected Files</span>
+
+                <span class="badge rounded-pill bg-primary">1</span>
+            </h3>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                                    <li class="list-group-item px-2 py-1"><code>tests/test_src/ClassA.php</code></li>
+                            </ul>
+        </div>
+    </div>
+</div></div>
 
 
 
+<div class="row mt-5">
+    <h1 id="changes-by-file-title">Changes by file</h1>
+</div>
 
-                <div class="col-md-5">
-                    <div class="card">
-                        <div class="card-header"><h3>Affected Files <small style="font-size: 13px;">(1)</small></h3></div>
-                        <div class="card-body">
-                            <ul class="list-group">
-                                                                    <li class="list-group-item px-2 py-1">tests/test_src/ClassA.php</li>
-                                                            </ul>
-                        </div>
-                    </div>
+<div class="card" id="changes-by-file">
+    <div class="card-body">
+        <div class="tab-content">
+            <div class="pagination-feedback text-cener text-muted mb-4"></div>
+
+                <div
+                    id="files-page-0"
+                    class="tab-pane active"
+                    role="tabpanel"
+                    tabindex="0"
+                >
+
+<div class="card mb-5">
+    <div class="card-header">
+        <h5><code>tests/test_src/ClassA.php</code></h5>
+    </div>
+    <div class="card-body p-0 overflow-hidden">
+        <div class="row">
+            <div class="col-xxl-3 pe-0">
+                <div class="p-3 pe-0">
+                    <h6 class="mt-2 text-uppercase">Applied Rectors</h6>
+                    <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item"><pre class='m-0'><code title='Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector'>CompleteDynamicPropertiesRector</code></pre></li>
+                                                    <li class="list-group-item"><pre class='m-0'><code title='Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector'>RemoveEmptyClassMethodRector</code></pre></li>
+                                            </ul>
                 </div>
             </div>
 
-
-            <h1>Changes by file</h1>
-            <div class="card">
-                <div class="card-body">
-                                            <div class="card mb-5">
-                            <div class="card-header">
-                                <h5>tests/test_src/ClassA.php</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-
-                                    <div class="col-xxl-8">
-                                        <div class="code-diff-container" data-content="--- tests/test_src/ClassA.php
+            <div class="col-xxl-9">
+                <div class="code-diff-container" data-content="--- tests/test_src/ClassA.php
 +++ tests/test_src/ClassA.php
 @@ -4,10 +4,12 @@
- 
+
  class ClassA {
- 
+
 +    /**
 +     * @var int
 +     */
@@ -106,17 +325,17 @@
      }
 -
 -    public function __construct() {}
- 
+
  }
 \ No newline at end of file
 ">
-                                            <code>
-                                                <pre>--- tests/test_src/ClassA.php
+                    <code>
+                        <pre>--- tests/test_src/ClassA.php
 +++ tests/test_src/ClassA.php
 @@ -4,10 +4,12 @@
- 
+
  class ClassA {
- 
+
 +    /**
 +     * @var int
 +     */
@@ -126,78 +345,96 @@
      }
 -
 -    public function __construct() {}
- 
+
  }
 \ No newline at end of file
 </pre>
-                                            </code>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xxl-4">
-                                        <h6 class="mt-xl-0 mt-lg-4">Applied Rectors</h6>
-                                        <ul class="list-group">
-                                                                                            <li class="list-group-item"><i>Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector</i></li>
-                                                                                            <li class="list-group-item"><i>Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector</i></li>
-                                                                                    </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                                    </div>
+                    </code>
+                </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    </div>
+</div>
+                </div>
+
+                        <div class="pagination-feedback text-cener text-muted mt-4"></div>
+        </div>
+    </div>
+</div>
+
+<nav class="container mt-4" aria-label="Affected files diff pagination">
+    <ul class="pagination pagination-lg justify-content-center flex-wrap">
+                    <li class="page-item active" role="presentation">
+                <a
+                    href="#changes-by-file-title"
+                    data-target="#files-page-0"
+                    class="page-link"
+                    data-page-number="1"
+                >1</a>
+            </li>
+            </ul>
+</nav>
+
+
+<input type="hidden" id="totalFilesChanged" value="1"/>
+
+<input type="hidden" id="pageSize" value="10"/>
+
+<script>
+    const totalFilesChanged = document.getElementById('totalFilesChanged').value
+    const pageSize = document.getElementById('pageSize').value;
+
+    document.querySelectorAll('.page-link').forEach(el => el.addEventListener('click', onClickPageLink))
+
+    function onClickPageLink(e) {
+        const
+            a = e.currentTarget,
+            li = a.parentElement,
+            targetPaneId = a.dataset['target'],
+            pageNumber = a.dataset['pageNumber'],
+            targetPane = document.querySelector(targetPaneId)
+
+        e.preventDefault();
+        updatePaginationFeedback(pageNumber)
+        document.querySelector('.page-item.active')?.classList.remove('active');
+        document.querySelector('.tab-pane.active')?.classList.remove('active');
+        li.classList.add('active');
+
+        targetPane.classList.add('active')
+        enableCodeDiffOn(targetPane)
+    }
+
+    function updatePaginationFeedback(page1Indexed) {
+        const
+            subsetStart = (page1Indexed - 1) * pageSize + 1,
+            subsetEnd = Math.min(page1Indexed * pageSize, totalFilesChanged),
+            paginationFeedback = `Showing files ${subsetStart}-${subsetEnd} of ${totalFilesChanged}`
+
+        document.querySelectorAll('.pagination-feedback').forEach(el => el.innerHTML = paginationFeedback)
+
+    }
+
+    updatePaginationFeedback(1)
+
+
+</script>
+        </div>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"
+        ></script>
+        <div class="container-fluid">
+    <footer class="d-flex align-items-center py-3 my-4 border-top">
+        <div class="col text-center">
+
+            <code><small class="text-muted"> Report generated at <b>Feb 19 1993, 00:00:00</b> with <a
+                        target="_blank" href="https://github.com/matheusab-soft/rector-html-output-formatter/"
+                    >matheusab/rector-html-output-formatter</a><br>Created with ❤️ by Matheus Alves Barbosa
+                </small> </code>
+        </div>
+
+    </footer>
+</div>
     </body>
 </html>
-
-<style>
-    [data-bs-theme="dark"] .d2h-info {
-        background-color: #424242;
-    }
-
-    [data-bs-theme="dark"] .d2h-ins {
-        background-color: #274427;
-    }
-
-    [data-bs-theme="dark"] .d2h-code-side-line del {
-        background-color: #a74b50;
-    }
-
-    [data-bs-theme="dark"] .d2h-del {
-        background-color: #4a2c2e;
-        border-color: #7a4747;
-    }
-
-    [data-bs-theme="dark"] .d2h-code-side-emptyplaceholder, .d2h-emptyplaceholder {
-        background-color: #222222;
-        border-color: #2a2a2a;
-    }
-
-    [data-bs-theme="dark"] .d2h-code-side-line {
-        color: #afafaf;
-    }
-
-    [data-bs-theme="dark"] .d2h-code-side-line ins {
-        background-color: #337432;
-    }
-
-    [data-bs-theme="dark"] .d2h-code-side-linenumber {
-        background-color: #343434;
-        border: solid #363636;
-        color: rgb(255 255 255 / 30%);
-    }
-
-    [data-bs-theme="dark"] .d2h-file-wrapper {
-        border: 1px solid #444;
-    }
-
-    [data-bs-theme="dark"] .d2h-file-header {
-        background-color: #242424;
-        border-bottom: 1px solid #525252;
-    }
-
-    [data-bs-theme="dark"] .d2h-del {
-        background-color: #4a2c2e;
-    }
-</style>

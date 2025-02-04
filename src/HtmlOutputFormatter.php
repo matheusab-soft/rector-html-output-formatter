@@ -9,6 +9,7 @@ use Rector\ValueObject\Configuration;
 use Rector\ValueObject\Error\SystemError;
 use Rector\ValueObject\ProcessResult;
 use Rector\Parallel\ValueObject\Bridge;
+use RuntimeException;
 
 use function count;
 use function ksort;
@@ -21,16 +22,20 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
      */
     public const NAME = 'html';
 
+    private static $generationDate;
+
     private $exportedFilePathPrefix;
 
     private $customReportTemplatePath;
 
     public function __construct(
         string $exportedFilePathPrefix,
-        string $customReportTemplatePath = __DIR__ . '/template/main.php'
+        string $customReportTemplatePath = __DIR__ . '/template/main.php',
+        string $testGenerationDate = null // used for testing only
     ) {
         $this->exportedFilePathPrefix = $exportedFilePathPrefix;
         $this->customReportTemplatePath = $customReportTemplatePath;
+        self::$generationDate = $testGenerationDate ?? date('M d Y, H:i:s', time());
     }
 
     public function getName(): string
@@ -116,6 +121,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
         return self::render($templatePath, [
             'errorsJson' => $errorsJson,
             'diffOccurrences' => self::getDiffOcurrences($errorsJson),
+            'reportGenerationDate' => self::$generationDate
         ]);
     }
 
@@ -143,7 +149,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
             $content = ob_get_contents();
             ob_end_clean();
         } else {
-            throw new \RuntimeException(sprintf('Cant find view file %s!', $file));
+            throw new RuntimeException(sprintf('Cant find view file %s!', $file));
         }
 
         return $content;

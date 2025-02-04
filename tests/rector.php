@@ -4,7 +4,7 @@ use MAB\Rector\HtmlOutputFormatter;
 use Rector\ChangesReporting\Contract\Output\OutputFormatterInterface;
 use Rector\Config\RectorConfig;
 
-return static function(RectorConfig $rectorConfig): void {
+return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->singleton(
         HtmlOutputFormatter::class,
         HtmlOutputFormatter::class
@@ -18,6 +18,11 @@ return static function(RectorConfig $rectorConfig): void {
     $rectorConfig->when(HtmlOutputFormatter::class)
         ->needs('$exportedFilePathPrefix')
         ->give(__DIR__ . '/generated/rector-report');
+
+    //for testing reasons
+    $rectorConfig->when(HtmlOutputFormatter::class)
+        ->needs('$testGenerationDate')
+        ->give(date('M d Y, H:i:s', 730080000));
 
     $rectorConfig->sets([
         \Rector\Set\ValueObject\SetList::DEAD_CODE,

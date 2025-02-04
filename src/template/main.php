@@ -1,6 +1,5 @@
 <?php
 
-$currentDate = date('M d Y, H:i:s', time());
 $graphLabels = array_keys($diffOccurrences);
 $graphDiffOccurrences = array_values($diffOccurrences);
 
@@ -43,7 +42,7 @@ function htmlAppliedRector($fqn)
     <body>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Rector HTML Report</a> <small>Generated at <?= $currentDate ?></small>
+                <a class="navbar-brand" href="#">Rector HTML Report</a> <small>Generated at <?= $reportGenerationDate ?></small>
             </div>
         </nav>
 
