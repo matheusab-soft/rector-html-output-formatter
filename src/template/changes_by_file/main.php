@@ -1,6 +1,6 @@
 <?php
 
-$pageSize = 2;
+$pageSize = 10;
 $chunks = array_chunk($errorsJson['file_diffs'], $pageSize);
 $totalFilesChanged = count($errorsJson['file_diffs']);
 ?>
