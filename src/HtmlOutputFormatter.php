@@ -31,7 +31,7 @@ final class HtmlOutputFormatter implements OutputFormatterInterface
     public function __construct(
         string $exportedFilePathPrefix,
         string $customReportTemplatePath = __DIR__ . '/template/main.php',
-        string $testGenerationDate = null // used for testing only
+        ?string $testGenerationDate = null // used for testing only
     ) {
         $this->exportedFilePathPrefix = $exportedFilePathPrefix;
         $this->customReportTemplatePath = $customReportTemplatePath;
